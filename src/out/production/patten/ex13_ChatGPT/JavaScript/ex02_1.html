@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+
+    let products=[
+        {name:"banana", price:1000},
+        {name:'apple', price:14000},
+        {name:'cup', price: 1200}
+    ]
+
+    function printProduct(product){
+        console.log(`${product.name}의 가격은 ${product.price}입니다.`)
+    }
+
+    for(let product of products){
+        printProduct(product)
+    }
+
+
+    function print(name, count){
+        //console.log(`${name}이 ${count}개가 있습니다.`)
+        return `${name}이 ${count}개가 있습니다.`;
+    }
+    print("apple", 12);
+    console.log(print("apple", 12))
+
+   // setInterval(print("book", 3), 1000);
+
+    var test=function (){
+        return 2==2;
+    }
+    console.log(test());
+
+    //230621
+    //JS filter를 순수코드로 구현, callback함수 이용. ChatGPT
+    var filterArray=function (arr, callback){
+        var arrayFiltered=[];
+        for(var i=0; i<arr.length; i++){
+            if(callback(arr[i])){
+                arrayFiltered.push(arr[i]);
+            }
+        }
+        return arrayFiltered;
+    }
+
+    var numbers=[1,2,3,4,5,6,7,8,9,10];
+    // var evenNumbers= function filterArray (numbers, item){
+    // return item%2===0;
+    // }
+    var evenNumbers=filterArray(numbers, function(item){ //위 27라인. callback(arr[i]
+        return item%4===0;
+    })
+
+   //console.log(numbers, evenNumbers);
+    console.log(evenNumbers);
+
+    //---------------
+    var items=[{name: 'orange', price:12}, {name:'pen', price: 15}, {name:'cup', price: 10}];
+
+    var filters=items.map(m=>m.name);
+    var filterKeys=Object.keys(items).map(key=>items[key]);
+    console.log(filters);
+    console.log(filterKeys);
+
+    // var printItems=items.map(m)=>{
+    //     console.log(`Name: ${name}`);
+    //     console.log(`Price: ${price}`);
+    // }
+    // printItems(items);
+
+    //---------------구조분해 할당.
+    var user = {
+        name: 'John Doe',
+        age: 30,
+        email: 'john.doe@example.com'
+    };
+
+    function printUserDetails({ name, age, email }) {
+        console.log(`Name: ${name}`);
+        console.log(`Age: ${age}`);
+        console.log(`Email: ${email}`);
+    }
+
+    printUserDetails(user);
+
+    var numbers = [1, 2, 3];
+    var [a, b, c] = numbers;
+    console.log(a); // 1
+    console.log(b); // 2
+    console.log(c); // 3
+
+
+    const landscape = {
+        title: 'Landscape',
+        photographer: 'Nathan',
+        location: [32.7122222, -103.1405556],
+    };
+
+    const {location:[latitude, longitude]}=landscape;
+    console.log(    latitude    );
+
+
+    function determineCityAndState([latitude, longitude]) {
+        console.log('determineCityAndState latitude>>', latitude)
+        // 좌표 탐색을 처리합니다
+        // START:region
+        const region = {
+            city: 'Hobbs',
+            county: 'Lea',
+            state: {
+                name: 'New Mexico',
+                abbreviation: 'NM',
+            },
+            place:{
+                lati:latitude,
+                logi:longitude
+            }
+        };
+        // END:region
+        return region;
+    }
+
+    //determineCityAndState(landscape);
+    // START:handle
+    function getCityAndState({ location }) {
+        const { city, state } = determineCityAndState(location);
+        return {
+            city,
+            state: state.abbreviation,
+            //place:this.place.lati
+        };
+        // {
+        //   city: 'Hobbs',
+        //   state: 'NM'
+        // }
+    }
+    // END:handle
+    getCityAndState(landscape);
+    console.log(getCityAndState(landscape));
+    //   city: 'Hobbs',
+    //   state: 'NM'
+
+
+
+</script>
+
+<div> 
+    장바구니 금액 : 
+    tax :
+
+</div>
+
+</body>
+</html>

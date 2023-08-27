@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var shopping_cart=[];
+    var shopping_cart_total=0;
+
+    function add_item_to_cart(name, price){
+        shopping_cart.push({
+            name:name, price:price
+        })
+        console.log('shopping_cart>>>', shopping_cart)
+       // calc_cart_total();
+    }
+
+    function calc_cart_total(){
+        shopping_cart_total=0;
+        for(var i=0; i<shopping_cart.length; i++){
+            var item=shopping_cart[i];
+            shopping_cart_total +=item.price;
+        }
+       //console.log('shopping_cart_total>>', shopping_cart_total )
+        //set_cart_total_dom();
+       //return shopping_cart_total;
+    }
+
+    add_item_to_cart('pasta', 10);
+    add_item_to_cart('tacos', 30);
+    console.log('calc_cart_total()>>>>>', calc_cart_total())
+    //calc_cart_total(); 
+
+    // var total=$('#total')
+
+</script>
+
+    <h3>장바구니 금액 : 
+        <li id="total"><script>calc_cart_total() </script> dollars</li>
+    </h3>
+
+</body>
+</html>

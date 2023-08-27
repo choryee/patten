@@ -1,0 +1,99 @@
+
+    import java.util.NoSuchElementException;
+
+    class Node<T> { //230723
+        T data;
+        Node<T> next;
+        //여기에서 class Node<T> 가 Node<T> next;을 가질 수 있나?
+        //예, class Node<T>는 자기 참조형 필드인 Node<T> next를 가질 수 있습니다. 이것은 연결 리스트를 구현할 때 자주 사용되는 패턴입니다.
+          Node<T> next는 현재 노드가 다음 노드를 가리키기 위한 참조를 나타냅니다. 이렇게 하면 각 노드가 데이터(T data)와 다음 노드를 가리키는 참조를 가지며, 이를 연결하여 전체 리스트를 구성할 수 있습니다.
+          Node<T> next를 사용하여 각 노드를 연결하여 연결 리스트를 구성했습니다.
+          각 노드는 자신의 데이터와 다음 노드를 가리키는 참조를 가지며, 이를 이용하여 리스트를 순회하거나 요소를 추가할 수 있습니다.
+
+        public Node(T data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public class LinkedList<T> {
+        private Node<T> head;
+        private int size;
+
+        public LinkedList() {
+            head = null;
+            size = 0;
+        }
+
+        // 리스트에 요소를 추가합니다.
+        public void add(T element) {
+            Node<T> newNode = new Node<>(element);
+            if (head == null) {
+                head = newNode;
+            } else {
+                Node<T> current = head;
+                while (current.next != null) {
+                    current = current.next;
+                }
+                current.next = newNode;
+            }
+            size++;
+        }
+
+        // 리스트에서 해당 요소를 삭제합니다.
+        public boolean remove(T element) {
+            if (head == null) {
+                return false;
+            }
+            if (head.data.equals(element)) {
+                head = head.next;
+                size--;
+                return true;
+            }
+            Node<T> current = head;
+            while (current.next != null) {
+                if (current.next.data.equals(element)) {
+                    current.next = current.next.next;
+                    size--;
+                    return true;
+                }
+                current = current.next;
+            }
+            return false;
+        }
+
+        // 인덱스에 해당하는 요소를 반환합니다.
+        public T get(int index) {
+            if (index < 0 || index >= size) {
+                throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            }
+            Node<T> current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            return current.data;
+        }
+
+        // 리스트의 크기를 반환합니다.
+        public int size() {
+            return size;
+        }
+
+        // 리스트가 비어있는지 확인합니다.
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        public static void main(String[] args) {
+            LinkedList<Integer> linkedList = new LinkedList<>();
+            linkedList.add(1);
+            linkedList.add(2);
+            linkedList.add(3);
+
+            System.out.println("LinkedList size: " + linkedList.size());
+            System.out.println("Element at index 1: " + linkedList.get(1));
+
+            linkedList.remove(2);
+            System.out.println("LinkedList size after removing 2: " + linkedList.size());
+        }
+    }
